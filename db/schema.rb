@@ -11,6 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140513225540) do
+
+  create_table "frog_game_scores", force: true do |t|
+    t.string   "name",                   null: false
+    t.integer  "score",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "frog_game_scores", ["created_at"], name: "index_frog_game_scores_on_created_at", using: :btree
+  add_index "frog_game_scores", ["score"], name: "index_frog_game_scores_on_score", using: :btree
+
+  create_table "waddle_war_scores", force: true do |t|
+    t.string   "name",                   null: false
+    t.integer  "score",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "waddle_war_scores", ["created_at"], name: "index_waddle_war_scores_on_created_at", using: :btree
+  add_index "waddle_war_scores", ["score"], name: "index_waddle_war_scores_on_score", using: :btree
 
 end

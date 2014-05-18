@@ -45,6 +45,8 @@ class HighScoreController < ActionController::Base
     else
       scores = score_class.where('created_at >= ?', 1.days.ago).order(score: :desc).limit(10)
     end
-    return render :json => scores.map {|s| [s.name, s.score] }
+    t = ""
+    scores.each { |score| t += "#{score.name} #{score.score.to_s} " }
+    return render :text => t
   end
 end

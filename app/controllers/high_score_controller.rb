@@ -46,7 +46,7 @@ class HighScoreController < ActionController::Base
       scores = score_class.where('created_at >= ?', 1.days.ago).order(score: :desc).limit(5)
     end
     t = ""
-    scores.each { |score| t += "#{score.name[0...5].gsub!(" ", "")} #{score.score.to_s} " }
+    scores.each { |score| t += "#{score.name.gsub(' ', '')[0...5]} #{score.score.to_s} " }
     return render :text => t
   end
 end

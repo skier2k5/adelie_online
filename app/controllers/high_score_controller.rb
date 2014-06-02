@@ -39,14 +39,14 @@ class HighScoreController < ActionController::Base
     end
     case time_frame
     when 'all_time'
-      scores = score_class.order(score: :desc).limit(5)
+      scores = score_class.order(score: :desc).limit(10)
     when 'monthly'
-      scores = score_class.where('created_at >= ?', 1.months.ago).order(score: :desc).limit(5)
+      scores = score_class.where('created_at >= ?', 1.months.ago).order(score: :desc).limit(10)
     else
-      scores = score_class.where('created_at >= ?', 1.days.ago).order(score: :desc).limit(5)
+      scores = score_class.where('created_at >= ?', 1.days.ago).order(score: :desc).limit(10)
     end
     t = ""
-    scores.each { |score| t += "#{score.name.gsub(' ', '')[0...5]} #{score.score.to_s} " }
+    scores.each { |score| t += "#{score.name.gsub(' ', '')[0...7]} #{score.score.to_s} " }
     return render :text => t
   end
 end

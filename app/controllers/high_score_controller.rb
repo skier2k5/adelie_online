@@ -45,8 +45,13 @@ class HighScoreController < ActionController::Base
     else
       scores = score_class.where('created_at >= ?', 1.days.ago).order(score: :desc).limit(10)
     end
+    scores = scores.to_a.uniq { |s| s.name.gsub(' ', '') }
     t = ""
     scores.each { |score| t += "#{score.name.gsub(' ', '')[0...7]} #{score.score.to_s} " }
     return render :text => t
+  end
+
+  def ww_leaderboard
+    @scores = WaddleWarScore.order(score: :desc).limit(10)
   end
 end

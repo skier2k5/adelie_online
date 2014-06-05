@@ -63,7 +63,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class = "active dropdown">
+            <li class = "dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="/" id="download">Games <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="download">
                 <li><a href="/superfrogjump">Super Frog Jump!</a></li>
@@ -71,7 +71,7 @@
               </ul>
             </li>
 
-            <li class = "dropdown">
+            <li class = "active dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="/" id="download">Leaderboards <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="download">
                 <li><a href="/sfj_leaderboard">Super Frog Jump!</a></li>
@@ -100,20 +100,19 @@
 
       <div class="starter-template">
 
-      <h1>Games</h1>
+      <h1>All Time Leaders</h1>
       <br/>
       <div class = "indexGames">
-        <a href= "/waddlewar"><img src="../../assets/WaddleWarTitle.png" height=150></a>
-        <p class = "gameDescription">
-          Protect your fort against snowmen and monsters in this top down arcade game. Available in the <a href = "https://itunes.apple.com/app/id870279884" target = "_blank">App Store</a>.
+        <% @scores.each_with_index do |score, index| %>
+        <p>
+        <span>
+          <%= index + 1 %>. <%= score.name %>
+        </span>
+        <span class="gameDescription">
+          <%= score.score %>
+        </span>
         </p>
-      </div>
-
-      <div class = "indexGames">
-        <a href= "/superfrogjump"><img src="../../assets/SFJTitle.png" height=150></a>
-        <p class = "gameDescription">
-         Out-jump the poison cloud in this fast paced race-against-time pull and jump game. Available June 2014. 
-        </p>
+        <% end %>
       </div>
 
     </div><!-- /.container -->

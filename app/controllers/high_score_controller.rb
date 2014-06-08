@@ -10,19 +10,22 @@ class HighScoreController < ActionController::Base
     name = params[:name].presence
     score = params[:score].presence
     secure_hash = params[:hash].presence
+    version = params[:version].presence || "1.0"
     case game
     when 'waddle_war'
       calcd_hash = Digest::MD5.hexdigest("#{name}#{score}#{WADDLE_WAR_SECRET_KEY}")
       if name && score && calcd_hash == secure_hash
         WaddleWarScore.create! :name => name,
-                               :score => score
+                               :score => score,
+                               :version => version
         return render :text => "OK"
       end
     when 'frog_game'
       calcd_hash = Digest::MD5.hexdigest("#{name}#{score}#{FROG_GAME_SECRET_KEY}")
       if name && score && calcd_hash == secure_hash
         FrogGameScore.create! :name => name,
-                               :score => score
+                              :score => score,
+                              :version => version
         return render :text => "OK"
       end
     end
@@ -31,6 +34,7 @@ class HighScoreController < ActionController::Base
   def show_score
     time_frame = params[:tf].presence || "daily"
     game = params[:game_name].presence
+    version = params[:version].presence || "1.0"
     case game
     when 'waddle_war'
       score_class = WaddleWarScore
@@ -39,11 +43,11 @@ class HighScoreController < ActionController::Base
     end
     case time_frame
     when 'all_time'
-      scores = score_class.order(score: :desc).limit(10)
+      scores = score_class.where(version: version).order(score: :desc).limit(10)
     when 'monthly'
-      scores = score_class.where('created_at >= ?', 1.months.ago).order(score: :desc).limit(10)
+      scores = score_class.where('created_at >= ?', 1.months.ago).where(version: version).order(score: :desc).limit(10)
     else
-      scores = score_class.where('created_at >= ?', 1.days.ago).order(score: :desc).limit(10)
+      scores = score_class.where('created_at >= ?', 1.days.ago).where(version: version).order(score: :desc).limit(10)
     end
     scores = scores.to_a.uniq { |s| s.name.gsub(' ', '') }
     t = ""
@@ -52,6 +56,6 @@ class HighScoreController < ActionController::Base
   end
 
   def ww_leaderboard
-    @scores = WaddleWarScore.order(score: :desc).limit(10)
+    @scores = WaddleWarScore.where(version: "1.0").order(score: :desc).limit(10)
   end
 end

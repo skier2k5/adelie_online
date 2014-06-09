@@ -35,16 +35,48 @@
       font-size: 14px;
     }
 
-    .gameDescription{
-      font-size: 18px;
-      max-width: 250px;
-      float: right;
-    }
-
     .indexGames{
-      max-width: 750px;
+
+      font-size: 20px;
       margin: 0 auto;
-    }
+      border-radius: 5px 5px 0 0;
+
+     } 
+
+     .indexGamesHeader{
+      font-size: 24px;
+      margin: 0 auto;
+      border-radius: 5px 5px 0 0;
+     }
+
+     th,td {
+      padding:10px 15px 10px 15px;
+      text-align: center;
+     }
+
+     tr:nth-child(even) {
+        background-color: #545454;
+     }
+
+     .highScoreSearch{
+      max-width: 250px;
+      margin: 0 auto;
+     }
+
+     .tableName{
+
+     }
+
+     .tableScore{
+
+     }
+
+     .tableDate{
+
+     }
+      .tfclear{
+        clear:both;
+      }
     </style>
   </head>
 
@@ -100,19 +132,45 @@
 
       <div class="starter-template">
 
-      <h1>All Time Leaders</h1>
+      <h1>Waddle War High Scores</h1>
       <br/>
-      <div class = "indexGames">
+
+       <form class = "highScoreSearch">
+            <input type="text" class="form-control col-lg-8" placeholder="Enter your name">
+       </form>
+     </br>
+     </br>
+     </br>
+      <div class="tfclear"></div>
+
+      <table class = "indexGamesHeader">
+        <tr>
+          <th>Today</th>
+          <th>7 Day</th>
+          <th>All Time</th>
+        </tr>
+      </table>
+      <table class = "indexGames">
+        <tr>
+          <th>Place</th>
+          <th>Name</th>
+          <th>Score</th>
+          <th>Date</th>
+        </tr>
         <% @scores.each_with_index do |score, index| %>
-        <p>
-        <span>
-          <%= index + 1 %>. <%= score.name %>
-        </span>
-        <span class="gameDescription">
-          <%= score.score %>
-        </span>
-        </p>
+          <tr>
+            <td><%= index + 1 %>.</td>
+            <td><%= score.name %></td>
+            <td><%= score.score %></td>
+            <td>Jun 01 '14</td>
+          </tr>
         <% end %>
+      </table>
+      <ul class="pager">
+                <li><a href="#">Previous</a></li>
+                <li><a href="#">Next</a></li>
+      </ul>
+
       </div>
 
     </div><!-- /.container -->

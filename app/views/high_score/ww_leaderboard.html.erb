@@ -136,7 +136,10 @@
       <br/>
 
        <form class = "highScoreSearch">
-            <input type="text" class="form-control col-lg-8" placeholder="Enter your name">
+            <input type="text" class="form-control col-lg-8" placeholder="Enter your name" name="search">
+            <input type="submit" value="Search" />
+            <input type="hidden" name="version" value="<%= @version %>" />
+            <input type="hidden" name="type" value="<%= @type %>" />
        </form>
      </br>
      </br>
@@ -145,9 +148,9 @@
 
       <table class = "indexGamesHeader">
         <tr>
-          <th>Today</th>
-          <th>7 Day</th>
-          <th>All Time</th>
+            <th><a href="/ww_leaderboard?type=daily&version=<%= @version %>">Daily</a></th>
+          <th><a href="/ww_leaderboard?type=weekly&version=<%= @version %>">Weekly</th>
+          <th><a href="/ww_leaderboard?type=all_time&version=<%= @version %>">All Time</th>
         </tr>
       </table>
       <table class = "indexGames">
@@ -167,8 +170,12 @@
         <% end %>
       </table>
       <ul class="pager">
-                <li><a href="#">Previous</a></li>
-                <li><a href="#">Next</a></li>
+          <% if @prev_start >= 0 %>
+            <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @prev_start %>">Previous</a></li>
+          <% end %>
+          <% if @next_start < @total_records %>
+            <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @next_start %>">Next</a></li>
+          <% end %>
       </ul>
 
       </div>

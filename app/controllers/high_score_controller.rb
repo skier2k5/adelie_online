@@ -58,20 +58,20 @@ class HighScoreController < ActionController::Base
   def ww_leaderboard
     @version = params[:version].presence || "1.0"
     @type = params[:type].presence || "alltime"
-    start = params[:start].presence || "0"
-    start = 0 if start.to_i < 0
+    @start = params[:start].presence || "0"
+    @start = 0 if @start.to_i < 0
     search = params[:search].presence || ""
     search = "%" + search + "%"
     case @type
     when 'daily'
-      @scores = WaddleWarScore.where(version: @version).where('created_at >= ?', 1.days.ago).where('name LIKE "%?%"', search).order(score: :desc).offset(start).limit(10)
+      @scores = WaddleWarScore.where(version: @version).where('created_at >= ?', 1.days.ago).where('name LIKE "%?%"', search).order(score: :desc).offset(@start).limit(10)
     when 'weekly'
-      @scores = WaddleWarScore.where(version: @version).where('created_at >= ?', 1.weeks.ago).where('name LIKE "%?%"', search).order(score: :desc).offset(start).limit(10)
+      @scores = WaddleWarScore.where(version: @version).where('created_at >= ?', 1.weeks.ago).where('name LIKE "%?%"', search).order(score: :desc).offset(@start).limit(10)
     else
-      @scores = WaddleWarScore.where(version: @version).where("name LIKE ?", search).order(score: :desc).offset(start).limit(10)
+      @scores = WaddleWarScore.where(version: @version).where("name LIKE ?", search).order(score: :desc).offset(@start).limit(10)
     end
-    @next_start = start.to_i + 10
-    @prev_start = start.to_i - 10
+    @next_start = @start.to_i + 10
+    @prev_start = @start.to_i - 10
     @total_records = WaddleWarScore.where(version: @version).length
   end
 end

@@ -162,10 +162,10 @@
         </tr>
         <% @scores.each_with_index do |score, index| %>
           <tr>
-            <td><%= index + 1 %>.</td>
+            <td><%= @start.to_i + index + 1 %>.</td>
             <td><%= score.name %></td>
             <td><%= score.score %></td>
-            <td>Jun 01 '14</td>
+            <td><%= score.created_at.strftime("%m/%d/%Y") %></td>
           </tr>
         <% end %>
       </table>

@@ -7,5 +7,5 @@ Rails.application.routes.draw do
    get 'post_score' => 'high_score#post_score'
    get 'show_score' => 'high_score#show_score'
    get 'ww_leaderboard' => 'high_score#ww_leaderboard'
-   get 'sfj_leaderboard' => 'index#superfrogjump'
+   get 'sfj_leaderboard' => 'high_score#fg_leaderboard'
 end

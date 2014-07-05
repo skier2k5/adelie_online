@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel = "shortcut icon" href = "../../assets/favicon.ico"/>
+
+    <title>Adelie Games</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../../assets/bootstrap.css">
+
+    <!-- Custom styles for this template -->
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    body {
+      padding-top: 50px;
+    }
+    .starter-template {
+      padding: 40px 15px;
+      text-align: center;
+    }
+    .lead{
+      font-size: 14px;
+    }
+
+    .indexGames{
+
+      font-size: 20px;
+      margin: 0 auto;
+      border-radius: 5px 5px 0 0;
+
+     } 
+
+     .indexGamesHeader{
+      font-size: 24px;
+      margin: 0 auto;
+      border-radius: 5px 5px 0 0;
+     }
+
+     th,td {
+      padding:10px 15px 10px 15px;
+      text-align: center;
+     }
+
+     tr:nth-child(even) {
+        background-color: #545454;
+     }
+
+     .highScoreSearch{
+      max-width: 250px;
+      margin: 0 auto;
+     }
+
+     .tableName{
+
+     }
+
+     .tableScore{
+
+     }
+
+     .tableDate{
+
+     }
+      .tfclear{
+        clear:both;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Adelie Online</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class = "dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="/" id="download">Games <span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="download">
+                <li><a href="/superfrogjump">Super Frog Jump!</a></li>
+                <li><a href="/waddlewar">Waddle War</a></li>
+              </ul>
+            </li>
+
+            <li class = "active dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="/" id="download">Leaderboards <span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="download">
+                <li><a href="/sfj_leaderboard">Super Frog Jump!</a></li>
+                <li><a href="/ww_leaderboard">Waddle War</a></li>
+              </ul>
+            </li>
+
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://twitter.com/AdelieGames" target="_blank">
+                  <img src="../../assets/twitter.png" height=18/>
+                </a></li>
+            <li><a href="https://www.facebook.com/Adelie" target="_blank">
+                  <img src="../../assets/facebook.png" height=18/>
+                </a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="starter-template">
+
+      <h1>Super Frog Jump High Scores</h1>
+      <br/>
+
+       <form class = "highScoreSearch">
+            <input type="text" class="form-control col-lg-8" placeholder="Enter your name" name="search">
+            <input type="submit" value="Search" />
+            <input type="hidden" name="version" value="<%= @version %>" />
+            <input type="hidden" name="type" value="<%= @type %>" />
+       </form>
+     </br>
+     </br>
+     </br>
+      <div class="tfclear"></div>
+
+      <table class = "indexGamesHeader">
+        <tr>
+            <th><a href="/sfj_leaderboard?type=daily&version=<%= @version %>">Daily</a></th>
+          <th><a href="/sfj_leaderboard?type=weekly&version=<%= @version %>">Weekly</th>
+          <th><a href="/sfj_leaderboard?type=all_time&version=<%= @version %>">All Time</th>
+        </tr>
+      </table>
+      <table class = "indexGames">
+        <tr>
+          <th>Place</th>
+          <th>Name</th>
+          <th>Score</th>
+          <th>Date</th>
+        </tr>
+        <% @scores.each_with_index do |score, index| %>
+          <tr>
+            <td><%= @start.to_i + index + 1 %>.</td>
+            <td><%= score.name %></td>
+            <td><%= score.score %></td>
+            <td><%= score.created_at.strftime("%m/%d/%Y") %></td>
+          </tr>
+        <% end %>
+      </table>
+      <ul class="pager">
+          <% if @prev_start >= 0 %>
+            <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @prev_start %>">Previous</a></li>
+          <% end %>
+          <% if @next_start < @total_records %>
+            <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @next_start %>">Next</a></li>
+          <% end %>
+      </ul>
+
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

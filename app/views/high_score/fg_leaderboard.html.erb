@@ -171,10 +171,10 @@
       </table>
       <ul class="pager">
           <% if @prev_start >= 0 %>
-            <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @prev_start %>">Previous</a></li>
+            <li><a href="/sfj_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @prev_start %>">Previous</a></li>
           <% end %>
           <% if @next_start < @total_records %>
-            <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @next_start %>">Next</a></li>
+            <li><a href="/sfj_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @next_start %>">Next</a></li>
           <% end %>
       </ul>
 

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
    get 'about' => 'index#about'
    get 'waddlewar' => 'index#waddlewar'
    get 'superfrogjump' => 'index#superfrogjump'
+   get 'skysheep' => 'index#skysheep'
    get 'post_score' => 'high_score#post_score'
    get 'show_score' => 'high_score#show_score'
    get 'ww_leaderboard' => 'high_score#ww_leaderboard'

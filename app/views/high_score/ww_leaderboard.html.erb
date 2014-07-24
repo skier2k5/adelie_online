@@ -1,105 +1,49 @@
 <% provide(:title, 'High Scores') %>
 
-    <style>
-    body {
-      padding-top: 50px;
-    }
-    .baseTemplate {
-      padding: 40px 15px;
-      text-align: center;
-    }
-    .lead{
-      font-size: 14px;
-    }
+<h1>Waddle War High Scores</h1>
+<br/>
 
-    .indexGames{
+<form class = "highScoreSearch">
+  <input type="text" class="form-control col-lg-8" placeholder="Enter your name" name="search">
+  <input type="submit" value="Search" />
+  <input type="hidden" name="version" value="<%= @version %>" />
+  <input type="hidden" name="type" value="<%= @type %>" />
+</form>
+</br>
+</br>
+</br>
+<div class="tfclear"></div>
 
-      font-size: 20px;
-      margin: 0 auto;
-      border-radius: 5px 5px 0 0;
-
-     } 
-
-     .indexGamesHeader{
-      font-size: 24px;
-      margin: 0 auto;
-      border-radius: 5px 5px 0 0;
-     }
-
-     th,td {
-      padding:10px 15px 10px 15px;
-      text-align: center;
-     }
-
-     tr:nth-child(even) {
-        background-color: #545454;
-     }
-
-     .highScoreSearch{
-      max-width: 250px;
-      margin: 0 auto;
-     }
-
-     .tableName{
-
-     }
-
-     .tableScore{
-
-     }
-
-     .tableDate{
-
-     }
-      .tfclear{
-        clear:both;
-      }
-    </style>
-
-      <h1>Waddle War High Scores</h1>
-      <br/>
-
-       <form class = "highScoreSearch">
-            <input type="text" class="form-control col-lg-8" placeholder="Enter your name" name="search">
-            <input type="submit" value="Search" />
-            <input type="hidden" name="version" value="<%= @version %>" />
-            <input type="hidden" name="type" value="<%= @type %>" />
-       </form>
-     </br>
-     </br>
-     </br>
-      <div class="tfclear"></div>
-
-      <table class = "indexGamesHeader">
-        <tr>
-            <th><a href="/ww_leaderboard?type=daily&version=<%= @version %>">Daily</a></th>
-          <th><a href="/ww_leaderboard?type=weekly&version=<%= @version %>">Weekly</th>
-          <th><a href="/ww_leaderboard?type=all_time&version=<%= @version %>">All Time</th>
-        </tr>
-      </table>
-      <table class = "indexGames">
-        <tr>
-          <th>Place</th>
-          <th>Name</th>
-          <th>Score</th>
-          <th>Date</th>
-        </tr>
-        <% @scores.each_with_index do |score, index| %>
-          <tr>
-            <td><%= @start.to_i + index + 1 %>.</td>
-            <td><%= score.name %></td>
-            <td><%= score.score %></td>
-            <td><%= score.created_at.strftime("%m/%d/%Y") %></td>
-          </tr>
-        <% end %>
-      </table>
-      <ul class="pager">
-          <% if @prev_start >= 0 %>
-            <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @prev_start %>">Previous</a></li>
-          <% end %>
-          <% if @next_start < @total_records %>
-            <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @next_start %>">Next</a></li>
-          <% end %>
-      </ul>
+<table class = "indexGamesHeader">
+  <tr>
+    <th><a href="/ww_leaderboard?type=daily&version=<%= @version %>">Daily</a></th>
+    <th><a href="/ww_leaderboard?type=weekly&version=<%= @version %>">Weekly</th>
+    <th><a href="/ww_leaderboard?type=all_time&version=<%= @version %>">All Time</th>
+  </tr>
+</table>
+<table class = "indexGames">
+  <tr>
+    <th>Place</th>
+    <th>Name</th>
+    <th>Score</th>
+    <th>Date</th>
+  </tr>
+  <% @scores.each_with_index do |score, index| %>
+    <tr>
+      <td><%= @start.to_i + index + 1 %>.</td>
+      <td><%= score.name %></td>
+      <td><%= score.score %></td>
+      <td><%= score.created_at.strftime("%m/%d/%Y") %></td>
+    </tr>
+  <% end %>
+</table>
+<ul class="pager">
+    <% if @prev_start >= 0 %>
+      <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @prev_start %>">Previous</a></li>
+    <% end %>
+    <% if @next_start < @total_records %>
+      <li><a href="/ww_leaderboard?type=<%= @type %>&version=<%= @version %>&start=<%= @next_start %>">Next</a></li>
+    <% end %>
+</ul>
 
 

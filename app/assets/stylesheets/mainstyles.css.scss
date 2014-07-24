@@ -1,0 +1,110 @@
+/* Layout */
+
+  .baseTemplate {
+    padding: 40px 15px;
+    text-align: center;
+  }
+
+  body {
+    padding-top: 50px;
+  }
+         
+  .lead{
+    font-size: 14px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .clear {
+     clear: both;
+  }
+
+/* Index */
+
+  .gameDescription{
+    font-size: 18px;
+    max-width: 250px;
+    float: right;
+  }
+
+  .indexGames{
+    max-width: 750px;
+    margin: 0 auto;
+  }
+
+
+
+/* Game Pages */
+
+/* Contact Page */
+
+  .contactParagraph{
+    font-size: 20px;
+  }
+
+  /* About Page */
+
+  .left {
+    float: left;
+  }
+      
+  .right {
+    float: right;
+    max-width: 450px;
+  }
+      
+  .aboutContain{
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+/* High Score pages */
+
+  .indexGames{
+    font-size: 20px;
+    margin: 0 auto;
+    border-radius: 5px 5px 0 0;
+  } 
+
+  .indexGamesHeader{
+    font-size: 24px;
+    margin: 0 auto;
+    border-radius: 5px 5px 0 0;
+  }
+
+  th,td {
+    padding:10px 15px 10px 15px;
+    text-align: center;
+  }
+
+  tr:nth-child(even) {
+    background-color: #545454;
+  }
+
+  .highScoreSearch{
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  .tableName{
+
+  }
+
+  .tableScore{
+
+  }
+
+  .tableDate{
+
+  }
+
+/* Unity Demo Partial */
+
+  #gameDemo {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 640px;
+  }
+
+
+    

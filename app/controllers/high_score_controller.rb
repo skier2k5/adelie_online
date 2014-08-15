@@ -52,7 +52,7 @@ class HighScoreController < ApplicationController
     end
     scores = scores.to_a.uniq { |s| s.name.gsub(' ', '') }
     t = ""
-    scores.each { |score| t += "#{score.name.gsub(' ', '')[0...7]} #{score.score.to_s} " }
+    scores.each { |score| t += "#{score.name.gsub(' ', '')[0...10]} #{score.score.to_s} " }
     return render :text => t
   end
 

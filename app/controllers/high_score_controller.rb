@@ -35,7 +35,7 @@ class HighScoreController < ApplicationController
   def show_score
     time_frame = params[:tf].presence || "daily"
     game = params[:game_name].presence
-    version = params[:version].presence || "1.0"
+    version = "1.0"
     case game
     when 'waddle_war'
       score_class = WaddleWarScore
@@ -57,7 +57,7 @@ class HighScoreController < ApplicationController
   end
 
   def ww_leaderboard
-    @version = "1.1"
+    @version = "1.0"
     @type = params[:type].presence || "alltime"
     @start = params[:start].presence || "0"
     @start = 0 if @start.to_i < 0

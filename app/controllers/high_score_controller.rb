@@ -57,7 +57,7 @@ class HighScoreController < ApplicationController
   end
 
   def ww_leaderboard
-    @version = params[:version].presence || "1.2"
+    @version = params[:version].presence || "1.0"
     @type = params[:type].presence || "alltime"
     @start = params[:start].presence || "0"
     @start = 0 if @start.to_i < 0

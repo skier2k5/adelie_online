@@ -33,7 +33,7 @@ class HighScoreController < ApplicationController
   end
 
   def show_score
-    time_frame = params[:tf].presence || "daily"
+    time_frame = params[:tf].presence || "alltime"
     game = params[:game_name].presence
     version = "1.0"
     case game
